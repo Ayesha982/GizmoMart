@@ -5,5 +5,5 @@ GizmoMart : Gadget Destination  E-Commerce MERN APP
 
 
 
-Image : https://drive.google.com/drive/folders/1KmY74OYniEodtOVAjNGJv4628HghRbcQ?usp=sharing
+
 
