@@ -10,6 +10,8 @@ import SummaryApi from './common';
 import Context from './context';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
+import ChatBot from './components/ChatBot'; 
+
 
 function App() {
   const dispatch = useDispatch()
@@ -62,6 +64,7 @@ function App() {
           <Outlet/>
         </main>
         <Footer/>
+        <ChatBot/>
       </Context.Provider>
     </>
   );
