@@ -1,6 +1,7 @@
 const express = require('express')
 
 const router = express.Router()
+const chatbotRoute = require('./chatbot'); // 👈 Add this
 
 const userSignUpController = require("../controller/user/userSignUp")
 const userSignInController = require('../controller/user/userSignIn')
@@ -61,6 +62,8 @@ router.post('/webhook',webhooks) // /api/webhook
 router.get("/order-list",authToken,orderController)
 router.get("/all-order",authToken,allOrderController)
 
+
+router.use('/chatbot', chatbotRoute); // 👈 Add this
 
 
 
