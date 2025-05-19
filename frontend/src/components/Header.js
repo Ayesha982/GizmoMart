@@ -22,25 +22,29 @@ const Header = () => {
   const searchQuery = URLSearch.getAll("q")
   const [search,setSearch] = useState(searchQuery)
 
-  const handleLogout = async() => {
-    const fetchData = await fetch(SummaryApi.logout_user.url,{
-      method : SummaryApi.logout_user.method,
-      credentials : 'include'
-    })
+  const handleLogout = async () => {
+  const fetchData = await fetch(SummaryApi.logout_user.url, {
+    method: SummaryApi.logout_user.method,
+    credentials: 'include',
+  });
 
-    const data = await fetchData.json()
+  const data = await fetchData.json();
 
-    if(data.success){
-      toast.success(data.message)
-      dispatch(setUserDetails(null))
-      navigate("/")
-    }
+  if (data.success) {
+    toast.success(data.message);
+    dispatch(setUserDetails(null));
 
-    if(data.error){
-      toast.error(data.message)
-    }
+    // 🛠️ Important: set logout flag to prevent auto-fetch
+    localStorage.setItem("logout", "true");
 
+    navigate('/');
+    window.location.reload(); // refresh the app to reflect logout
   }
+
+  if (data.error) {
+    toast.error(data.message);
+  }
+};
 
   const handleSearch = (e)=>{
     const { value } = e.target

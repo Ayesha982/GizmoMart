@@ -28,32 +28,35 @@ const Login = () => {
     }
 
 
-    const handleSubmit = async(e) =>{
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+  e.preventDefault();
 
-        const dataResponse = await fetch(SummaryApi.signIn.url,{
-            method : SummaryApi.signIn.method,
-            credentials : 'include',
-            headers : {
-                "content-type" : "application/json"
-            },
-            body : JSON.stringify(data)
-        })
+  const dataResponse = await fetch(SummaryApi.signIn.url, {
+    method: SummaryApi.signIn.method,
+    credentials: 'include',
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
 
-        const dataApi = await dataResponse.json()
+  const dataApi = await dataResponse.json();
 
-        if(dataApi.success){
-            toast.success(dataApi.message)
-            navigate('/')
-            fetchUserDetails()
-            fetchUserAddToCart()
-        }
+  if (dataApi.success) {
+    toast.success(dataApi.message);
 
-        if(dataApi.error){
-            toast.error(dataApi.message)
-        }
+    // ✅ Fetch user details and cart before navigation
+    await fetchUserDetails();
+    await fetchUserAddToCart();
 
-    }
+    navigate('/');
+  }
+
+  if (dataApi.error) {
+    toast.error(dataApi.message);
+  }
+};
+
 
     console.log("data login",data)
     

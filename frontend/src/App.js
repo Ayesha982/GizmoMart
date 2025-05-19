@@ -41,13 +41,18 @@ function App() {
     setCartProductCount(dataApi?.data?.count)
   }
 
-  useEffect(()=>{
-    /**user Details */
-    fetchUserDetails()
-    /**user Details cart product */
-    fetchUserAddToCart()
+  useEffect(() => {
+  const isLoggedOut = localStorage.getItem("logout") === "true";
 
-  },[])
+  if (!isLoggedOut) {
+    fetchUserDetails();
+    fetchUserAddToCart();
+  } else {
+    // Clear the logout flag so next login works normally
+    localStorage.removeItem("logout");
+  }
+}, []);
+
   return (
     <>
       <Context.Provider value={{
